@@ -15,7 +15,7 @@ if name_of_file:
         f.write(str(value) + "\n")
         
     if col2.button("send email"):
-        send_email(st.secrets["PASS"], name_of_file)
+        send_email(st.secrets["PASS"], st.secrets["EMAIL"], name_of_file)
 
     f.close()
 
