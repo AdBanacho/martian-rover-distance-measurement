@@ -2,6 +2,7 @@ import smtplib
 import ssl
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 
 def send_email(password, email, name_of_file):
