@@ -19,7 +19,7 @@ def send_email(password, email, name_of_file):
     payload = MIMEBase('application', 'octate-stream')
     payload.set_payload(attach_file.read())
     encoders.encode_base64(payload)
-    payload.add_header('Content-Decomposition', 'attachment', filename=attach_file_name)
+    payload.add_header('Content-Decomposition', 'attachment; filename={}'.format(attach_file_name))
     message.attach(payload)
     session = smtplib.SMTP('smtp.gmail.com', 587)
     session.starttls()
