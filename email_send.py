@@ -5,10 +5,10 @@ from email.mime.base import MIMEBase
 from email import encoders
 
 
-def send_email(password, name_of_file):
-    sender_address = 'timezero97@gmail.com'
+def send_email(password, email, name_of_file):
+    sender_address = email_from[0]
     sender_pass = password
-    receiver_address = 'adbanachowicz@gmail.com'
+    receiver_address = email[1]
     message = MIMEMultipart()
     message['From'] = sender_address
     message['To'] = receiver_address
