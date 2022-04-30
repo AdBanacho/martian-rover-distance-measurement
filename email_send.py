@@ -11,7 +11,13 @@ def send_email(password, email, name_of_file):
     message['From'] = sender_address
     message['To'] = receiver_address
     message['Subject'] = 'Martian rover.'
-
+    
+    mail_content = '''Hello,
+    the email contains the results of the experiment as an attachment.
+    Thank You'''
+    
+    message.attach(MIMEText(mail_content, 'plain'))
+    
     try:
         with open(name_of_file, "rb") as attachment:
             p = MIMEApplication(attachment.read(), _subtype="txt")
