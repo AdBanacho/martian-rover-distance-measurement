@@ -14,7 +14,7 @@ def send_email(password, email, name_of_file):
     message['To'] = receiver_address
     message['Subject'] = 'Martian rover.'
     message.attach(MIMEText(" ", 'plain'))
-    attach_file_name = name_of_file + ".txt"
+    attach_file_name = name_of_file
     attach_file = open(attach_file_name, 'rb')
     payload = MIMEBase('application', 'octate-stream')
     payload.set_payload(attach_file.read())
