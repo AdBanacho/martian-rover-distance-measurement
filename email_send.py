@@ -6,7 +6,7 @@ from email import encoders
 
 
 def send_email(password, email, name_of_file):
-    sender_address = email_from[0]
+    sender_address = email[0]
     sender_pass = password
     receiver_address = email[1]
     message = MIMEMultipart()
