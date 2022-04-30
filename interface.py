@@ -13,8 +13,7 @@ if name_of_file:
     col1, col2 = st.columns([3, 1])
     if col1.button("add"):
         f.write(str(value) + "\n")
-    st.write("XD")
-    st.write(st.secrets["PASS"])
+        
     if col2.button("send email"):
         send_email(st.secrets["PASS"], name_of_file)
 
