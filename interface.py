@@ -3,7 +3,7 @@ from email_send import send_email
 
 st.title("Martian Rover")
 
-name_of_file = st.text_input("File name")
+name_of_file = st.text_input("File name") + ".txt"
 
 if name_of_file:
     f = open(name_of_file, "a")
