@@ -13,10 +13,10 @@ if name_of_file:
     col1, col2 = st.columns([3, 1])
     if col1.button("add"):
         f.write(str(value) + "\n")
-        
+    st.write(name_of_file) 
     if col2.button("send email"):
         send_email(st.secrets["PASS"], [st.secrets["EMAIL_FROM"], st.secrets["EMAIL_TO"]], name_of_file)
-
+       
     f.close()
 
     for no, d in enumerate(open(name_of_file, 'r').readlines()):
