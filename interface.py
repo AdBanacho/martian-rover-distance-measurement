@@ -8,7 +8,7 @@ name_of_file = st.text_input("File name") + ".txt"
 if name_of_file:
     f = open(name_of_file, "a")
 
-    value = st.number_input("Distance", max_value=100, min_value=10)
+    value = st.slider("Distance", max_value=100, min_value=10)
 
     col1, col2 = st.columns([3, 1])
     if col1.button("add"):
