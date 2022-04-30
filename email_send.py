@@ -1,29 +1,26 @@
 import smtplib
+import ssl
+from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
 
 
 def send_email(password, email, name_of_file):
     sender_address = email[0]
-    sender_pass = password
     receiver_address = email[1]
-    message = MIMEMultipart()
+    message = MIMEMultipart("alternative")
     message['From'] = sender_address
     message['To'] = receiver_address
     message['Subject'] = 'Martian rover.'
-    message.attach(MIMEText(" ", 'plain'))
-    attach_file_name = name_of_file
-    attach_file = open(attach_file_name, 'rb')
-    payload = MIMEBase('application', 'octate-stream')
-    payload.set_payload(attach_file.read())
-    encoders.encode_base64(payload)
-    payload.add_header('Content-Decomposition', 'attachment; filename={}'.format(attach_file_name))
-    message.attach(payload)
-    session = smtplib.SMTP('smtp.gmail.com', 587)
-    session.starttls()
-    session.login(sender_address, sender_pass)
-    text = message.as_string()
-    session.sendmail(sender_address, receiver_address, text)
-    session.quit()
+
+    try:
+        with open(name_of_file, "rb") as attachment:
+            p = MIMEApplication(attachment.read(), _subtype="txt")
+            p.add_header('Content-Disposition', "attachment; filename= %s" % name_of_file)
+            message.attach(p)
+    except Exception as e:
+        print(str(e))
+
+    make_context = ssl.create_default_context()
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=make_context) as server:
+        server.login(sender_address, password)
+        server.sendmail(sender_address, receiver_address, message.as_string())
